@@ -659,7 +659,7 @@ export default function HomePage() {
           }}
         >
           <a
-            href="/vyno-app.apk"
+            href="https://expo.dev/artifacts/eas/U67a-CtDtuH64K2-derz-P75iDT4ZsB9KVzVoOMCQiw.apk"
             className="btn-primary"
             style={{ padding: "14px 32px", fontSize: "14px" }}
           >
