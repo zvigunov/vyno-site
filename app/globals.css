@@ -1,0 +1,250 @@
+@import "tailwindcss";
+
+@theme {
+  /* Paleta VYNO — ierarhie noua: crem = fundal, negru = text */
+  --color-bg:       #FAF6EE;
+  --color-bg-warm:  #F5EDE0;
+  --color-burgundy: #4A1219;
+  --color-gold:     #C9A84C;
+  --color-ink:      #0D0D0D;
+  --color-green:    #4ADE80;
+  --color-error:    #FF6B6B;
+}
+
+/* Fonturi custom — @utility (nu @theme) ca var() sa se rezolve la runtime */
+@utility font-title {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
+}
+
+@utility font-body {
+  font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #FAF6EE;
+  color: #0D0D0D;
+  font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar       { width: 5px; }
+::-webkit-scrollbar-track { background: #F5EDE0; }
+::-webkit-scrollbar-thumb { background: rgba(74,18,25,0.35); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #4A1219; }
+
+/* ── Card styles — funcționează pe fundal crem ── */
+.card-vyno {
+  background: rgba(13, 13, 13, 0.03);
+  border: 1px solid rgba(13, 13, 13, 0.08);
+  border-radius: 16px;
+}
+
+/* dual-compatible: gold border funcționează pe crem ȘI pe negru */
+.card-gold {
+  background: rgba(201, 168, 76, 0.06);
+  border: 1px solid rgba(201, 168, 76, 0.28);
+  border-radius: 16px;
+}
+
+/* ── Butoane ── */
+
+/* btn-primary: burgund solid — funcționează pe AMBELE fundaluri */
+.btn-primary {
+  background: #4A1219;
+  border: 1px solid #4A1219;
+  color: #FAF6EE;
+  border-radius: 14px;
+  padding: 12px 28px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+.btn-primary:hover {
+  background: rgba(74, 18, 25, 0.82);
+  border-color: rgba(74, 18, 25, 0.82);
+  transform: translateY(-1px);
+}
+
+/* btn-ghost: pentru fundaluri DESCHISE (crem) */
+.btn-ghost {
+  background: transparent;
+  border: 1px solid rgba(13, 13, 13, 0.18);
+  color: rgba(13, 13, 13, 0.6);
+  border-radius: 14px;
+  padding: 12px 28px;
+  font-weight: 500;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+.btn-ghost:hover {
+  background: rgba(13, 13, 13, 0.05);
+  border-color: rgba(13, 13, 13, 0.3);
+  color: #0D0D0D;
+}
+
+/* btn-ghost-dark: pentru fundaluri ÎNCHISE (negru) */
+.btn-ghost-dark {
+  background: transparent;
+  border: 1px solid rgba(250, 246, 238, 0.15);
+  color: rgba(250, 246, 238, 0.65);
+  border-radius: 14px;
+  padding: 12px 28px;
+  font-weight: 500;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+.btn-ghost-dark:hover {
+  background: rgba(250, 246, 238, 0.07);
+  border-color: rgba(250, 246, 238, 0.3);
+  color: #FAF6EE;
+}
+
+/* Gold divider */
+.divider-gold {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #C9A84C, transparent);
+  margin: 0 auto;
+}
+
+/* ── Opening section load animation ── */
+@keyframes vy-open {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.vy-open {
+  animation: vy-open 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.vy-delay-2 { animation-delay: 0.25s; }
+.vy-delay-3 { animation-delay: 0.45s; }
+.vy-delay-4 { animation-delay: 0.65s; }
+
+/* ── Scroll reveal animations ── */
+[data-animate] {
+  opacity: 0;
+  transition-property: opacity, transform;
+  transition-duration: 0.75s;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-animate="fade-up"]    { transform: translateY(28px); }
+[data-animate="fade-left"]  { transform: translateX(-28px); }
+[data-animate="fade-right"] { transform: translateX(28px); }
+
+[data-animate].visible {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* ── Nav link cu underline animat — pentru nav pe fundal crem ── */
+.nav-link {
+  position: relative;
+  color: rgba(13, 13, 13, 0.5);
+  font-size: 0.875rem;
+  text-decoration: none;
+  letter-spacing: 0.3px;
+  transition: color 0.3s ease;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #C9A84C;
+  transition: width 0.35s ease;
+}
+.nav-link:hover { color: #0D0D0D; }
+.nav-link:hover::after { width: 100%; }
+
+/* ── Link underline pentru fundaluri DESCHISE ── */
+.link-underline {
+  position: relative;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #C9A84C;
+  transition: width 0.35s ease;
+}
+.link-underline:hover::after { width: 100%; }
+
+/* ── Link underline pentru fundaluri ÎNCHISE ── */
+.link-underline-dark {
+  position: relative;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.link-underline-dark::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: rgba(201, 168, 76, 0.7);
+  transition: width 0.35s ease;
+}
+.link-underline-dark:hover::after { width: 100%; }
+
+/* ── Responsive editorial layouts ── */
+.editorial-split {
+  display: flex;
+  align-items: stretch;
+}
+.editorial-split .col-left  { flex: 1; }
+.editorial-split .col-right { flex: 1; }
+.editorial-split .divider-vert {
+  width: 1px;
+  background: rgba(13, 13, 13, 0.08);
+  flex-shrink: 0;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: 5fr 8fr;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .editorial-split { flex-direction: column; }
+  .editorial-split .divider-vert {
+    width: auto;
+    height: 1px;
+    margin: 36px 0;
+  }
+  .steps-grid { grid-template-columns: 1fr; }
+}
